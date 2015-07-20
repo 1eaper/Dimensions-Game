@@ -9,9 +9,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Main {
 	
-	private static int height = 576;
-	private static int width = height * 16 / 9;
-	
 	// Main Function
 	public static void main(String[] args) {
 		
@@ -34,7 +31,7 @@ public class Main {
 	private static void initDisplay() {
 		
 		try {
-			Display.setDisplayMode(new DisplayMode(width, height));
+			Display.setDisplayMode(new DisplayMode(800,400));
 			Display.create();
 			Display.setVSyncEnabled(true);
 			Keyboard.create();
@@ -59,7 +56,7 @@ public class Main {
 	// Initializes the game
 	private static void initGame() {
 		
-		//TODO: make game class
+		
 	}
 	
 	// The game loop
@@ -67,30 +64,18 @@ public class Main {
 		
 		while(!Display.isCloseRequested()) {
 			
-			//TODO: Time.update();
-			//TODO: getInput();
-			//TODO: update();
+			//TODO: Move this to a render function
+			glClear(GL_COLOR_BUFFER_BIT);
+			glLoadIdentity();
 			
-			render(); // Render Screen
+			Display.update();
+			Display.sync(60);
 		}
-	}
-	
-	// Renders the screen
-	private static void render() {
-		
-		glClear(GL_COLOR_BUFFER_BIT);
-		glLoadIdentity();
-		
-		//TODO: game.render()
-		
-		Display.update();
-		Display.sync(60);
 	}
 	
 	// Cleans up the program
 	private static void cleanUp() {
 
-		Display.destroy();
-		Keyboard.destroy();
+		
 	}
 }

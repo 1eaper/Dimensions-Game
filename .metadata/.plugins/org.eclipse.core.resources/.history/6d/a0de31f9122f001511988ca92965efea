@@ -34,7 +34,7 @@ public class Main {
 	private static void initDisplay() {
 		
 		try {
-			Display.setDisplayMode(new DisplayMode(width, height));
+			Display.setDisplayMode(new DisplayMode(height, width));
 			Display.create();
 			Display.setVSyncEnabled(true);
 			Keyboard.create();
