@@ -1,0 +1,28 @@
+package game;
+
+import game.engine.Draw;
+
+import org.lwjgl.opengl.Display;
+
+public class Game {
+
+	public Game() {
+		
+		
+	}
+	
+	public void getInput() {
+		
+		
+	}
+	
+	public void update() {
+		
+		
+	}
+	
+	public void render() {
+		
+		Draw.drawSq(Display.getWidth() / 2 - 25, Display.getHeight() / 2 - 25, 50);
+	}
+}

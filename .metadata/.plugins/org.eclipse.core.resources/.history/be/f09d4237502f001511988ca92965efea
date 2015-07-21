@@ -1,0 +1,47 @@
+package game;
+
+import game.engine.GameObject;
+
+public class Player extends GameObject{
+
+	public Player() {
+		
+		super(50, 50, 50, 50, 50);
+	}
+	
+	public Player(float x, float y, float z, float w, float size) {
+		
+		super(x, y, z, w, size);
+	}
+	
+	public void update() {
+		
+		
+	}
+	
+	public void render() {
+		
+		Draw.drawSq(x, y, sx);
+	}
+	
+	public void move(float velx, float vely) {
+		
+		x += velx;
+		y += vely;
+	}
+	
+	public void move(float velx, float vely, float velz) {
+		
+		x += velx;
+		y += vely;
+		z += velz;
+	}
+	
+	public void move(float velx, float vely, float velz, float velw) {
+		
+		x += velx;
+		y += vely;
+		z += velz;
+		w += velw;
+	}
+}

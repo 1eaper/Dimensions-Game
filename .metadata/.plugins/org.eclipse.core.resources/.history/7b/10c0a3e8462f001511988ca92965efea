@@ -1,0 +1,24 @@
+package game;
+
+public class Game {
+
+	public Game() {
+		
+		
+	}
+	
+	public void getInput() {
+		
+		
+	}
+	
+	public void update() {
+		
+		
+	}
+	
+	public void render() {
+		
+		
+	}
+}

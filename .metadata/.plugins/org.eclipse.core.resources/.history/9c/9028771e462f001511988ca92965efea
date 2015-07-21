@@ -1,0 +1,16 @@
+package game.engine;
+
+import org.lwjgl.opengl.GL11;
+
+public class Draw {
+
+	public static void drawSq(float x, float y, float size) {
+		
+		glPushMatrix();
+		{
+			
+			
+		}
+		glPopMatrix();
+	}
+}

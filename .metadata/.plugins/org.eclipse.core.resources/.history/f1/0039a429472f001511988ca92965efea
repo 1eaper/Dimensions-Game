@@ -1,0 +1,26 @@
+package game;
+
+import game.engine.Draw;
+
+public class Game {
+
+	public Game() {
+		
+		
+	}
+	
+	public void getInput() {
+		
+		
+	}
+	
+	public void update() {
+		
+		
+	}
+	
+	public void render() {
+		
+		Draw.drawSq(0, 0, 50);
+	}
+}
