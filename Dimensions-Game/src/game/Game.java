@@ -1,7 +1,5 @@
 package game;
 
-import game.engine.Time;
-
 import org.lwjgl.input.Keyboard;
 
 public class Game {
@@ -17,11 +15,11 @@ public class Game {
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
 			
-			player.move(player.VEL * Time.Delta(), 0f);
+			player.move(1, 0);
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 			
-			player.move(-player.VEL * Time.Delta(), 0f);
+			player.move(-1, 0);
 		}
 	}
 	

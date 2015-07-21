@@ -2,17 +2,22 @@ package game;
 
 import game.engine.Draw;
 import game.engine.GameObject;
+import game.engine.Time;
 
 import org.lwjgl.opengl.Display;
 
 public class Player extends GameObject{
 
-	public static final float VEL = 0.000001f;
-	public static final float SIZE = 50f;
+	public final static float SIZE = 64f;
+
+	private float moveTime;
+	private float timer;
 	
 	public Player() {
 		
-		super(SIZE / 2, Display.getHeight() / 2 - SIZE / 2, SIZE);
+		super(SIZE * 3 / 2, Display.getHeight() / 2, SIZE);
+		moveTime = .125f;
+		timer = 0;
 	}
 	
 	public Player(float x, float y, float z, float w, float size) {
@@ -22,7 +27,9 @@ public class Player extends GameObject{
 	
 	public void update() {
 		
-		
+		if(timer > 0) {
+			timer -= Time.Delta();
+		}
 	}
 	
 	public void render() {
@@ -30,24 +37,16 @@ public class Player extends GameObject{
 		Draw.drawSq(x, y, sx);
 	}
 	
-	public void move(float velx, float vely) {
-		
-		x += velx;
-		y += vely;
+	public void move(int xdir, int ydir) {
+		if(canMove()) {
+			x += SIZE * xdir;
+			y += SIZE * ydir;
+			timer = moveTime;
+		}
 	}
 	
-	public void move(float velx, float vely, float velz) {
+	public boolean canMove() {
 		
-		x += velx;
-		y += vely;
-		z += velz;
-	}
-	
-	public void move(float velx, float vely, float velz, float velw) {
-		
-		x += velx;
-		y += vely;
-		z += velz;
-		w += velw;
+		return timer <= 0;
 	}
 }
