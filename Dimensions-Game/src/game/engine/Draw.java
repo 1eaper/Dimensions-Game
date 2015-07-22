@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 public class Draw {
 
-	public static void drawSq(float x, float y, float size) {
+	public static void drawSq(float x, float y, float size, int id) {
 		
 		size /= 2;
 		
@@ -22,7 +22,13 @@ public class Draw {
 			
 			glTranslatef(x, y, 0f);
 			
-			glColor3f(0, 0, 0);
+			if (id == GameObject.PLAYER_ID) {
+				glColor3f(0, 1, 0);
+			} else if (id == GameObject.GOAL_ID) {
+				glColor3f(1, 1, 0);
+			} else {
+				glColor3f(0, 0, 0);
+			}
 			
 			glBegin(GL_QUADS);
 			{

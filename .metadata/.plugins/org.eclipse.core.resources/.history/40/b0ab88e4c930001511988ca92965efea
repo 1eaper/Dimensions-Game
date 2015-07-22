@@ -1,0 +1,70 @@
+package game.engine;
+
+
+import org.lwjgl.opengl.Display;
+
+public class Player extends GameObject{
+
+	public final static float SIZE = 64f;
+
+	private float moveTime;
+	private float timer;
+	
+	public int[] position;
+	
+	public Player() {
+		
+		super(SIZE * 3 / 2, Display.getHeight() / 2, SIZE);
+		position = new int[4];
+		for(int i = 0; i < position.length; i++) {
+			position[i] = 0;
+		}
+		moveTime = .125f;
+		timer = 0;
+		this.id = PLAYER_ID;
+	}
+	
+	public Player(float x, float y, float z, float w, float size) {
+		
+		super(x, y, z, w, size);
+	}
+	
+	public void update() {
+		
+		if(timer > 0) {
+			timer -= Time.Delta();
+		}
+	}
+	
+	public void render() {
+		
+		Draw.drawSq(x, y, SIZE, id);
+	}
+	
+	public void render(float levelX, float levelY) {
+		
+		Draw.drawSq((float)position[0] + levelX, (float)position[1] + levelY, SIZE, id);
+	}
+	
+	public void move(int xdir, int ydir) {
+		/*if(canMove()) {
+			x += SIZE * xdir;
+			y += SIZE * ydir;
+			timer = moveTime;
+		}*/
+		if(canMove()) {
+			position[0] += xdir;
+			position[1] += ydir;
+			x = SIZE * position[0];
+			System.out.println(position[0]);
+			y = SIZE * position[1];
+			System.out.println(position[1]);
+			timer = moveTime;
+		}
+	}
+	
+	public boolean canMove() {
+		
+		return timer <= 0;
+	}
+}

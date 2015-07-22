@@ -2,85 +2,22 @@ package game.engine;
 
 public abstract class GameObject {
 
-	protected float x, y, z, w;
-	protected float sx, sy, sz, sw;
+	protected int id;
+	protected int[] position;
+	public static final int PLAYER_ID = 0;
+	public static final int GOAL_ID = 1;
+	public static final int BLOCK_ID = 2;
 	
 	/*
 	 *  Constructors
 	 */
 	
-	public GameObject(float x, float y, float sizex, float sizey) {
+	public GameObject(int x, int y) {
 		
-		this.x = x;
-		this.y = y;
-		this.z = 0;
-		this.w = 0;
-		this.sx = sizex;
-		this.sy = sizey;
-		this.sz = 1;
-		this.sw = 1;
-	}
-	
-	public GameObject(float x, float y, float size) {
+		position = new int[4];
 		
-		this.x = x;
-		this.y = y;
-		this.z = 0;
-		this.w = 0;
-		this.sx = size;
-		this.sy = size;
-		this.sz = 1;
-		this.sw = 1;
-	}
-	
-	public GameObject(float x, float y, float z, 
-					  float sizex, float sizey, float sizez) {
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = 0;
-		this.sx = sizex;
-		this.sy = sizey;
-		this.sz = sizez;
-		this.sw = 1;
-	}
-	
-	public GameObject(float x, float y, float z, float size, int meh) {
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = 0;
-		this.sx = size;
-		this.sy = size;
-		this.sz = size;
-		this.sw = 1;
-	}
-	
-	public GameObject(float x, float y, float z, float w, 
-					  float sizex, float sizey, float sizez, float sizew) {
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = w;
-		this.sx = sizex;
-		this.sy = sizey;
-		this.sz = sizez;
-		this.sw = sizew;
-	}
-	
-	public GameObject(float x, float y, float z, float w, float size) {
-		
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.w = w;
-		this.sx = size;
-		this.sy = size;
-		this.sz = size;
-		this.sw = size;
+		position[0] = x;
+		position[1] = y;
 	}
 	
 	/*
@@ -94,12 +31,6 @@ public abstract class GameObject {
 	 *  Getters
 	 */
 	
-	public float getX() { return x; }
-	public float getY() { return y; }
-	public float getZ() { return z; }
-	public float getW() { return w; }
-	public float getSX() { return sx; }
-	public float getSY() { return sy; }
-	public float getSZ() { return sz; }
-	public float getSW() { return sw; }
+	public int getX() { return position[0]; }
+	public int getY() { return position[1]; }
 }
