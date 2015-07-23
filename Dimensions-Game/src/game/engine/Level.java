@@ -21,9 +21,9 @@ public class Level {
 		
 		this.objects = new ArrayList<GameObject>(); // Initialize the objects list
 		this.dimension = Game.ONE_TWO_ID; // Assign the dimension to 1/2d
-		initLevel(); // Initialize the objects in the level
 		
-		objects.add(new Block());
+		objects.add(new Block(3, 0));
+		objects.add(new Block(3,1));
 		this.goal = new Goal(); // Initialize the goal
 		objects.add(goal); // Add the goal to the objects list
 		this.player = new Player(); // Initialize the player
@@ -31,29 +31,17 @@ public class Level {
 		
 		this.level = new int[Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE]; // Initialize the level array
 		
-		this.x = Game.TILE_SIZE * 5 / 2; // Set the x position of the level
+		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
 		this.y = Display.getHeight() / 2; // Set the y position of the level
-		
-		//TODO: Replace this system
-		for(int x = 0; x < Game.LEVEL_SIZE; x++) {
-			for(int y = 0; y < Game.LEVEL_SIZE; y++) {
-				for(int z = 0; z < Game.LEVEL_SIZE; z++) {
-					for(int w = 0; w < Game.LEVEL_SIZE; w++) {
-						if(x == 7 && y == 0) {
-							this.level[x][y][z][w] = Game.GOAL_ID;
-						} else if (x == 3 && y == 0) {
-							this.level[x][y][z][w] = Game.BLOCK_ID;
-						} else {
-							this.level[x][y][z][w] = 9;
-						}
-					}
-				}
-			}
-		}
+
+		initObjects(); // Initialize the objects in the level array
 	}
 	
 	// Update everything in the level
 	public void update() {
+
+		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
+		this.y = Display.getHeight() / 2; // Set the y position of the level
 		
 		for(GameObject go : objects) { // For all of the objects in the level
 			
@@ -107,8 +95,27 @@ public class Level {
 		}
 	}
 	
-	public void initLevel() {
+	// Sets up the positions of all of the objects in the level array
+	public void initObjects() {
 		
+		// Sets all of the blocks to empty by default
+		for(int x = 0; x < Game.LEVEL_SIZE; x++) {
+			for(int y = 0; y < Game.LEVEL_SIZE; y++) {
+				for(int z = 0; z < Game.LEVEL_SIZE; z++) {
+					for(int w = 0; w < Game.LEVEL_SIZE; w++) {
+							this.level[x][y][z][w] = Game.EMPTY_ID;
+					}
+				}
+			}
+		}
 		
+		// Sets all of the occupied spaces in the level to their respective occupant
+		for (GameObject go : objects) {
+			
+			if (go.getID() != Game.PLAYER_ID) {
+				
+				level[go.getX()][go.getY()][go.getZ()][go.getW()] = go.getID();
+			}
+		}
 	}
 }

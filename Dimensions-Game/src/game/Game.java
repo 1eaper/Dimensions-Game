@@ -9,9 +9,10 @@ public class Game {
 	public static final int ONE_TWO_ID = 12; // The id for a 1/2d level
 	public static final int TWO_THREE_ID = 23; // The id for a 2/3d level
 	public static final int THREE_FOUR_ID = 34; // The id for a 3/4d level
-	public static final int PLAYER_ID = 0; // The player id
-	public static final int GOAL_ID = 1; // The goal id
-	public static final int BLOCK_ID = 2; // The block id
+	public static final int EMPTY_ID = 0; // The id of an empty space
+	public static final int PLAYER_ID = 1; // The player id
+	public static final int GOAL_ID = 2; // The goal id
+	public static final int BLOCK_ID = 3; // The block id
 	public final static int LEVEL_SIZE = 8; // The size of a level for each dimension
 	public final static float TILE_SIZE = 64f; // The tile size for every object
 	

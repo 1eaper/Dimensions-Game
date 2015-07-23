@@ -16,10 +16,11 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
 public class Main {
 	
-	private static int height = 576;
+	private static int height = 720;
 	private static int width = height * 16 / 9;
 	
 	private static Game game;
@@ -52,6 +53,7 @@ public class Main {
 		try {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.create();
+			Display.setResizable(true);
 			Display.setVSyncEnabled(true);
 			Keyboard.create();
 		} catch(LWJGLException e) {
@@ -109,6 +111,9 @@ public class Main {
 	
 	// Renders the screen
 	private static void render() {
+		
+		width = Display.getWidth();
+		height = Display.getHeight();
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
