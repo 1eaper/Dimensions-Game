@@ -6,47 +6,52 @@ import org.lwjgl.input.Keyboard;
 
 public class Game {
 
-	public static final int ONE_TWO_ID = 12;
-	public static final int TWO_THREE_ID = 23;
-	public static final int THREE_FOUR_ID = 34;
-	public final static int LEVEL_SIZE = 8;
-
-	public final static float TILE_SIZE = 64f;
+	public static final int ONE_TWO_ID = 12; // The id for a 1/2d level
+	public static final int TWO_THREE_ID = 23; // The id for a 2/3d level
+	public static final int THREE_FOUR_ID = 34; // The id for a 3/4d level
+	public static final int PLAYER_ID = 0; // The player id
+	public static final int GOAL_ID = 1; // The goal id
+	public static final int BLOCK_ID = 2; // The block id
+	public final static int LEVEL_SIZE = 8; // The size of a level for each dimension
+	public final static float TILE_SIZE = 64f; // The tile size for every object
 	
-	private Level level;
+	private Level level; // The level handler
 	
+	// Default constructor
 	public Game() {
 		
-		level = new Level();
+		level = new Level(); // initialize the level
 	}
 	
 	public void getInput() {
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) { // If the right key is hit
 			
-			level.move(1, 0, 0, 0);
+			level.move(1, 0, 0, 0); // Move the player one unit right
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) { // If the left key is hit
 			
-			level.move(-1, 0, 0, 0);
+			level.move(-1, 0, 0, 0); // Move the player one unit left
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) { // If the up key is hit
 			
-			level.move(0, 1, 0, 0);
+			level.move(0, 1, 0, 0); // Move the player one unit up
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) { // If the down key is hit
 			
-			level.move(0, -1, 0, 0);
+			level.move(0, -1, 0, 0); // Move the player one unit down
 		}
 	}
 	
+	// Update function
 	public void update() {
 		
-		level.update();
+		level.update(); // Update the level
 	}
 	
+	// Render function
 	public void render() {
 		
-		level.render();
+		level.render(); // Render everything in the level
 	}
 }

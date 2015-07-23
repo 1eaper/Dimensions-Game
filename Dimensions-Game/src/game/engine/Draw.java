@@ -8,23 +8,24 @@ import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 import static org.lwjgl.opengl.GL11.glColor3f;
+import game.Game;
 
 import org.lwjgl.opengl.GL11;
 
 public class Draw {
 
-	public static void drawSq(float x, float y, float size, int id) {
+	public static void drawSq(float x, float y, int id) {
 		
-		size /= 2;
+		float size = Game.TILE_SIZE / 2;
 		
 		glPushMatrix();
 		{
 			
 			glTranslatef(x, y, 0f);
 			
-			if (id == GameObject.PLAYER_ID) {
+			if (id == Game.PLAYER_ID) {
 				glColor3f(0, 1, 0);
-			} else if (id == GameObject.GOAL_ID) {
+			} else if (id == Game.GOAL_ID) {
 				glColor3f(1, 1, 0);
 			} else {
 				glColor3f(0, 0, 0);
