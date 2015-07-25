@@ -42,7 +42,7 @@ public class Game {
 			level.move(0, 1, 0, 0); // Move the player one unit up
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN) // If the down key is hit
-				|| Keyboard.isKeyDown(Keyboard.KEY_D)) { // Or if the D key is hit
+				|| Keyboard.isKeyDown(Keyboard.KEY_S)) { // Or if the D key is hit
 			
 			level.move(0, -1, 0, 0); // Move the player one unit down
 		}
