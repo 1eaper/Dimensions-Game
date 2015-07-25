@@ -21,7 +21,7 @@ public class Game {
 	// Default constructor
 	public Game() {
 		
-		level = new Level(); // initialize the level
+		level = new Level(TWO_THREE_ID); // initialize the level
 	}
 	
 	public void getInput() {
@@ -41,6 +41,14 @@ public class Game {
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) { // If the down key is hit
 			
 			level.move(0, -1, 0, 0); // Move the player one unit down
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_R)) { // If the R key is hit
+			
+			level.move(0, 0, 1, 0); // Move the player one unit forward
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_F)){ // If the F key is hit
+			
+			level.move(0, 0, -1, 0); // Move the player one unit back
 		}
 	}
 	

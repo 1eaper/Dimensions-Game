@@ -30,33 +30,22 @@ public class Player extends GameObject{
 		}
 	}
 	
-	/*// Moves the player in the given direction
-	public void move(int xdir, int ydir, int zdir, int wdir) {
-		
-		if(canMove()) { // If the timer is zeroed
-			
-			// Assigns temporary variables to check if the movement is allowed
-			int tempx = position[0] + xdir;
-			int tempy = position[1] + ydir;
-			
-			// Checks if the movement would be within bounds
-			if(tempx >= 0 && tempx <= Game.LEVEL_SIZE - 1) position[0] = tempx;
-			if(tempy >= 0 && tempy <= Game.LEVEL_SIZE - 1) position[1] = tempy;
-			
-			// Debug code
-			System.out.println(position[0] + ", " + position[1]);
-			System.out.println(getX() + " : " + getY());
-			
-			resetTimer(); // Resets the timer
-		}
-	}//*/
-	
+	// Moves the player to the given coordinates in 1/2d
 	public void move(int xpos, int ypos) {
 		
 		position[0] = xpos;
 		position[1] = ypos;
 	}
 	
+	// Moves the player to the given coordinates in 2/3d
+	public void move(int xpos, int ypos, int zpos) {
+		
+		position[0] = xpos;
+		position[1] = ypos;
+		position[2] = zpos;
+	}
+	
+	// Resets the move timer
 	public void resetTimer() {
 		
 		timer = moveTime;

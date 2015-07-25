@@ -27,6 +27,17 @@ public abstract class GameObject {
 		position[3] = 0;
 	}
 	
+	// Initialize the object for a 2/3d level
+	public GameObject(int x, int y, int z) {
+		
+		position = new int[4];
+		
+		position[0] = x;
+		position[1] = y;
+		position[2] = z;
+		position[3] = 0;
+	}
+	
 	/*
 	 *  Abstract functions
 	 */

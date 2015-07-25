@@ -17,13 +17,12 @@ public class Level {
 	private float x, y; // The level's coordinates on the screen (for rendering)
 	
 	// Default constructor for a 2d level
-	public Level() {
+	public Level(int dimension) {
 		
 		this.objects = new ArrayList<GameObject>(); // Initialize the objects list
-		this.dimension = Game.ONE_TWO_ID; // Assign the dimension to 1/2d
+		this.dimension = dimension; // Assign the dimension to the given dimension
 		
-		objects.add(new Block(3, 0));
-		objects.add(new Block(3,1));
+		tempSetup();
 		this.goal = new Goal(); // Initialize the goal
 		objects.add(goal); // Add the goal to the objects list
 		this.player = new Player(); // Initialize the player
@@ -41,7 +40,10 @@ public class Level {
 	public void update() {
 
 		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
-		this.y = Display.getHeight() / 2; // Set the y position of the level
+		if(dimension == Game.ONE_TWO_ID)
+			this.y = Display.getHeight() / 2; // Set the y position of the level
+		else if(dimension == Game.TWO_THREE_ID)
+			this.y = Display.getHeight() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the y position of the level
 		
 		for(GameObject go : objects) { // For all of the objects in the level
 			
@@ -56,6 +58,8 @@ public class Level {
 			
 			if(dimension == Game.ONE_TWO_ID && go.getY() == player.getY())
 				go.render(x, y, dimension); // Render the object
+			if(dimension == Game.TWO_THREE_ID && go.getZ() == player.getZ())
+				go.render(x, y, dimension);
 		}
 	}
 	
@@ -79,19 +83,88 @@ public class Level {
 			// Checks if the movement would be within bounds
 			if(tempx >= 0 && tempx <= Game.LEVEL_SIZE - 1) {
 				if(tempy >= 0 && tempy <= Game.LEVEL_SIZE - 1) {
-					
-					int temp = level[tempx][tempy][tempz][tempw];
-					System.out.println("Temp : " + temp);
-					if (temp == Game.BLOCK_ID)
-						System.out.println("None shall pass");
-					else if (temp == Game.GOAL_ID)
-						System.out.println("You win!");
-					else
-						player.move(tempx, tempy);
-					
-					player.resetTimer();
+					if(tempz >= 0 && tempz <= Game.LEVEL_SIZE - 1) {
+						
+						int temp = level[tempx][tempy][tempz][tempw];
+						System.out.println("Temp : " + temp);
+						if (temp == Game.BLOCK_ID)
+							System.out.println("None shall pass");
+						else if (temp == Game.GOAL_ID)
+							System.out.println("You win!");
+						else {
+							
+							if(dimension == Game.ONE_TWO_ID)
+								player.move(tempx, tempy);
+							else if(dimension == Game.TWO_THREE_ID)
+								player.move(tempx, tempy, tempz);
+						}
+						
+						player.resetTimer();
+					}
 				}
 			}
+		}
+	}
+	
+	// Le inefficient level setup
+	public void tempSetup() {
+		
+		if(dimension == Game.ONE_TWO_ID) {
+			objects.add(new Block(3, 0));
+			objects.add(new Block(3, 1));
+			objects.add(new Block(3, 2));
+			objects.add(new Block(3, 5));
+			objects.add(new Block(3, 6));
+			objects.add(new Block(3, 7));
+		} else if (dimension == Game.TWO_THREE_ID) {
+			objects.add(new Block(3, 0, 0));
+				objects.add(new Block(3, 1, 0));
+				objects.add(new Block(3, 2, 0));
+				objects.add(new Block(3, 3, 0));
+				objects.add(new Block(3, 4, 0));
+				objects.add(new Block(3, 5, 0));
+				objects.add(new Block(3, 6, 0));
+				objects.add(new Block(3, 7, 0));
+			objects.add(new Block(3, 0, 1));
+				objects.add(new Block(3, 1, 1));
+				objects.add(new Block(3, 2, 1));
+				objects.add(new Block(3, 3, 1));
+				objects.add(new Block(3, 4, 1));
+				objects.add(new Block(3, 5, 1));
+				objects.add(new Block(3, 6, 1));
+				objects.add(new Block(3, 7, 1));
+			objects.add(new Block(3, 0, 2));
+				objects.add(new Block(3, 1, 2));
+				objects.add(new Block(3, 2, 2));
+				objects.add(new Block(3, 3, 2));
+				objects.add(new Block(3, 4, 2));
+				objects.add(new Block(3, 5, 2));
+				objects.add(new Block(3, 6, 2));
+				objects.add(new Block(3, 7, 2));
+			objects.add(new Block(3, 0, 5));
+				objects.add(new Block(3, 1, 5));
+				objects.add(new Block(3, 2, 5));
+				objects.add(new Block(3, 3, 5));
+				objects.add(new Block(3, 4, 5));
+				objects.add(new Block(3, 5, 5));
+				objects.add(new Block(3, 6, 5));
+				objects.add(new Block(3, 7, 5));
+			objects.add(new Block(3, 0, 6));
+				objects.add(new Block(3, 1, 6));
+				objects.add(new Block(3, 2, 6));
+				objects.add(new Block(3, 3, 6));
+				objects.add(new Block(3, 4, 6));
+				objects.add(new Block(3, 5, 6));
+				objects.add(new Block(3, 6, 6));
+				objects.add(new Block(3, 7, 6));
+			objects.add(new Block(3, 0, 7));
+				objects.add(new Block(3, 1, 7));
+				objects.add(new Block(3, 2, 7));
+				objects.add(new Block(3, 3, 7));
+				objects.add(new Block(3, 4, 7));
+				objects.add(new Block(3, 5, 7));
+				objects.add(new Block(3, 6, 7));
+				objects.add(new Block(3, 7, 7));
 		}
 	}
 	
