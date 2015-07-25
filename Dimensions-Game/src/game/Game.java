@@ -26,19 +26,23 @@ public class Game {
 	
 	public void getInput() {
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) { // If the right key is hit
+		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) // If the right is hit
+				|| Keyboard.isKeyDown(Keyboard.KEY_D)) { // Or if the D key is hit
 			
 			level.move(1, 0, 0, 0); // Move the player one unit right
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) { // If the left key is hit
+		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) // If the left key is hit
+				|| Keyboard.isKeyDown(Keyboard.KEY_A)) { // Or if the A Key is hit
 			
 			level.move(-1, 0, 0, 0); // Move the player one unit left
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) { // If the up key is hit
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP) // If the up key is hit
+				|| Keyboard.isKeyDown(Keyboard.KEY_W)) { // Or if the W key is hit
 			
 			level.move(0, 1, 0, 0); // Move the player one unit up
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) { // If the down key is hit
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN) // If the down key is hit
+				|| Keyboard.isKeyDown(Keyboard.KEY_D)) { // Or if the D key is hit
 			
 			level.move(0, -1, 0, 0); // Move the player one unit down
 		}
