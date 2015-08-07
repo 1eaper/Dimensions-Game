@@ -12,7 +12,9 @@ public class Player extends GameObject{
 	public Player() {
 		
 		// Runs the 1/2d GameObject constructor
-		super(0, 0);
+		super(0, 0, 0, 0);
+		
+		this.canMove = true;
 		
 		// Initializes the timer
 		moveTime = .125f;
@@ -30,19 +32,19 @@ public class Player extends GameObject{
 		}
 	}
 	
-	// Moves the player to the given coordinates in 1/2d
-	public void move(int xpos, int ypos) {
-		
-		position[0] = xpos;
-		position[1] = ypos;
-	}
-	
-	// Moves the player to the given coordinates in 2/3d
-	public void move(int xpos, int ypos, int zpos) {
-		
-		position[0] = xpos;
-		position[1] = ypos;
-		position[2] = zpos;
+	// Player specific move wrapper
+	public boolean move(int xdir, int ydir, int zdir, int wdir, Level level) {
+
+		if (this.canMove()) {
+			if(super.move(xdir, ydir, zdir, wdir, level)) {
+			
+				this.resetTimer();
+				return true;
+			} else {
+				
+			}
+		}
+		return false;
 	}
 	
 	// Resets the move timer

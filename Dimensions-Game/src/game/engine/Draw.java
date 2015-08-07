@@ -27,7 +27,9 @@ public class Draw {
 				glColor3f(0, 1, 0);
 			} else if (id == Game.GOAL_ID) {
 				glColor3f(1, 1, 0);
-			} else {
+			} else if (id == Game.MOVEABLE_ID) {
+				glColor3f(0,0,1);
+			} else  {
 				glColor3f(0, 0, 0);
 			}
 			

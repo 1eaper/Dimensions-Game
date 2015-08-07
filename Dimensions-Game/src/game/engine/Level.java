@@ -13,7 +13,7 @@ public class Level {
 	private Goal goal; // The goal
 	private ArrayList<GameObject> objects; // A list of objects in the level
 	//private int[][][][] layout; // The array to initialize the level
-	private int[][][][] level; // All of the objects in the level by coordinate
+	public int[][][][] level; // All of the objects in the level by coordinate
 	private float x, y; // The level's coordinates on the screen (for rendering)
 	
 	// Default constructor for a 2d level
@@ -23,17 +23,13 @@ public class Level {
 		this.dimension = dimension; // Assign the dimension to the given dimension
 		
 		tempSetup();
-		this.goal = new Goal(); // Initialize the goal
-		objects.add(goal); // Add the goal to the objects list
-		this.player = new Player(); // Initialize the player
-		objects.add(player); // Add the player to the objects list
 		
 		this.level = new int[Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE]; // Initialize the level array
 		
 		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
 		this.y = Display.getHeight() / 2; // Set the y position of the level
 
-		initObjects(); // Initialize the objects in the level array
+		updateObjects(); // Initialize the objects in the level array
 	}
 	
 	// Update everything in the level
@@ -65,45 +61,11 @@ public class Level {
 	
 	// Move the player
 	public void move(int xdir, int ydir, int zdir, int wdir) {
-
-		if(player.canMove()) {
-			System.out.println("Start of Move");
-			System.out.println("Current X : " + player.getX());
-			System.out.println("X direction : " + xdir);
-			System.out.println("Current Y : " + player.getY());
-			System.out.println("Y direction : " + ydir);
+		if(player.move(xdir, ydir, zdir, wdir, this)) {
 			
-			int tempx = xdir + player.getX();
-			int tempy = ydir + player.getY();
-			int tempz = zdir + player.getZ();
-			int tempw = wdir + player.getW();
-			
-			System.out.println("Temp Coordinates : (" + tempx + ", " + tempy + ", " + tempz + ", " + tempw + ")");
-			
-			// Checks if the movement would be within bounds
-			if(tempx >= 0 && tempx <= Game.LEVEL_SIZE - 1) {
-				if(tempy >= 0 && tempy <= Game.LEVEL_SIZE - 1) {
-					if(tempz >= 0 && tempz <= Game.LEVEL_SIZE - 1) {
-						
-						int temp = level[tempx][tempy][tempz][tempw];
-						System.out.println("Temp : " + temp);
-						if (temp == Game.BLOCK_ID)
-							System.out.println("None shall pass");
-						else if (temp == Game.GOAL_ID)
-							System.out.println("You win!");
-						else {
-							
-							if(dimension == Game.ONE_TWO_ID)
-								player.move(tempx, tempy);
-							else if(dimension == Game.TWO_THREE_ID)
-								player.move(tempx, tempy, tempz);
-						}
-						
-						player.resetTimer();
-					}
-				}
-			}
+			updateObjects();
 		}
+		
 	}
 	
 	// Le inefficient level setup
@@ -111,65 +73,46 @@ public class Level {
 		
 		if(dimension == Game.ONE_TWO_ID) {
 			objects.add(new Block(3, 0));
-			objects.add(new Block(3, 1));
-			objects.add(new Block(3, 2));
-			objects.add(new Block(3, 5));
-			objects.add(new Block(3, 6));
-			objects.add(new Block(3, 7));
+				objects.add(new Block(3, 1));
+				objects.add(new Block(3, 2));
+				objects.add(new Block(3, 5));
+				objects.add(new Block(3, 6));
+				objects.add(new Block(3, 7));
+			objects.add(new Moveable(3,3));
+				objects.add(new Moveable(3,4));
+			this.goal = new Goal(); // Initialize the goal
+			objects.add(goal); // Add the goal to the objects list
+			this.player = new Player(); // Initialize the player
+			objects.add(player); // Add the player to the objects list
+			
 		} else if (dimension == Game.TWO_THREE_ID) {
-			objects.add(new Block(3, 0, 0));
-				objects.add(new Block(3, 1, 0));
-				objects.add(new Block(3, 2, 0));
-				objects.add(new Block(3, 3, 0));
-				objects.add(new Block(3, 4, 0));
-				objects.add(new Block(3, 5, 0));
-				objects.add(new Block(3, 6, 0));
-				objects.add(new Block(3, 7, 0));
-			objects.add(new Block(3, 0, 1));
-				objects.add(new Block(3, 1, 1));
-				objects.add(new Block(3, 2, 1));
-				objects.add(new Block(3, 3, 1));
-				objects.add(new Block(3, 4, 1));
-				objects.add(new Block(3, 5, 1));
-				objects.add(new Block(3, 6, 1));
-				objects.add(new Block(3, 7, 1));
-			objects.add(new Block(3, 0, 2));
-				objects.add(new Block(3, 1, 2));
-				objects.add(new Block(3, 2, 2));
-				objects.add(new Block(3, 3, 2));
-				objects.add(new Block(3, 4, 2));
-				objects.add(new Block(3, 5, 2));
-				objects.add(new Block(3, 6, 2));
-				objects.add(new Block(3, 7, 2));
-			objects.add(new Block(3, 0, 5));
-				objects.add(new Block(3, 1, 5));
-				objects.add(new Block(3, 2, 5));
-				objects.add(new Block(3, 3, 5));
-				objects.add(new Block(3, 4, 5));
-				objects.add(new Block(3, 5, 5));
-				objects.add(new Block(3, 6, 5));
-				objects.add(new Block(3, 7, 5));
-			objects.add(new Block(3, 0, 6));
-				objects.add(new Block(3, 1, 6));
-				objects.add(new Block(3, 2, 6));
-				objects.add(new Block(3, 3, 6));
-				objects.add(new Block(3, 4, 6));
-				objects.add(new Block(3, 5, 6));
-				objects.add(new Block(3, 6, 6));
-				objects.add(new Block(3, 7, 6));
-			objects.add(new Block(3, 0, 7));
-				objects.add(new Block(3, 1, 7));
-				objects.add(new Block(3, 2, 7));
-				objects.add(new Block(3, 3, 7));
-				objects.add(new Block(3, 4, 7));
-				objects.add(new Block(3, 5, 7));
-				objects.add(new Block(3, 6, 7));
-				objects.add(new Block(3, 7, 7));
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 0));
+			}
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 1));
+			}
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 2));
+			}
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 5));
+			}
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 6));
+			}
+			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
+				objects.add(new Block(3, i, 7));
+			}
+			this.goal = new Goal(7, 7); // Initialize the goal
+			objects.add(goal); // Add the goal to the objects list
+			this.player = new Player(); // Initialize the player
+			objects.add(player); // Add the player to the objects list
 		}
 	}
 	
 	// Sets up the positions of all of the objects in the level array
-	public void initObjects() {
+	public void updateObjects() {
 		
 		// Sets all of the blocks to empty by default
 		for(int x = 0; x < Game.LEVEL_SIZE; x++) {
@@ -190,5 +133,30 @@ public class Level {
 				level[go.getX()][go.getY()][go.getZ()][go.getW()] = go.getID();
 			}
 		}
+	}
+	
+	// Returns the gameObject at a given coordinate
+	/*
+	 * getObject()
+	 */
+	public GameObject getObject(int x, int y) {
+		
+		return getObject(x, y, 0, 0);
+	}
+	public GameObject getObject(int x, int y, int z) {
+		
+		return getObject(x, y, z, 0);
+	}
+	public GameObject getObject(int x, int y, int z, int w) {
+
+		for(GameObject go : objects) {
+			
+			if(go.getX() == x && go.getY() == y && go.getZ() == z && go.getW() == 0) {
+				
+				return go;
+			}
+		}
+
+		return null;
 	}
 }

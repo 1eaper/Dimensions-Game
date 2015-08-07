@@ -13,6 +13,7 @@ public class Game {
 	public static final int PLAYER_ID = 1; // The player id
 	public static final int GOAL_ID = 2; // The goal id
 	public static final int BLOCK_ID = 3; // The block id
+	public static final int MOVEABLE_ID = 4; // The moveable block id
 	public final static int LEVEL_SIZE = 8; // The size of a level for each dimension
 	public final static float TILE_SIZE = 64f; // The tile size for every object
 	
@@ -21,7 +22,7 @@ public class Game {
 	// Default constructor
 	public Game() {
 		
-		level = new Level(TWO_THREE_ID); // initialize the level
+		level = new Level(ONE_TWO_ID); // initialize the level
 	}
 	
 	public void getInput() {
