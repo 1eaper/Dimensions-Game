@@ -18,11 +18,14 @@ public class Game {
 	public final static float TILE_SIZE = 64f; // The tile size for every object
 	
 	private Level level; // The level handler
+	private int levelNum; // The level number
 	
 	// Default constructor
 	public Game() {
 		
-		level = new Level(ONE_TWO_ID); // initialize the level
+		levelNum = 0;
+		
+		level = new Level(levelNum); // initialize the level
 	}
 	
 	public void getInput() {
@@ -61,6 +64,10 @@ public class Game {
 	public void update() {
 		
 		level.update(); // Update the level
+		if(level.isDone) { // If the level is done, go to the next level
+			levelNum++;
+			level = new Level(levelNum);
+		}
 	}
 	
 	// Render function

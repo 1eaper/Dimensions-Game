@@ -15,14 +15,15 @@ public class Level {
 	//private int[][][][] layout; // The array to initialize the level
 	public int[][][][] level; // All of the objects in the level by coordinate
 	private float x, y; // The level's coordinates on the screen (for rendering)
+	public boolean isDone; // Whether or not the level is done
 	
 	// Default constructor for a 2d level
-	public Level(int dimension) {
+	public Level(int levelNum) {
 		
+		this.isDone = false;
 		this.objects = new ArrayList<GameObject>(); // Initialize the objects list
-		this.dimension = dimension; // Assign the dimension to the given dimension
 		
-		tempSetup();
+		tempSetup(levelNum);
 		
 		this.level = new int[Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE][Game.LEVEL_SIZE]; // Initialize the level array
 		
@@ -69,23 +70,32 @@ public class Level {
 	}
 	
 	// Le inefficient level setup
-	public void tempSetup() {
+	public void tempSetup(int levelNum) {
 		
-		if(dimension == Game.ONE_TWO_ID) {
-			objects.add(new Block(3, 0));
+		System.out.println("Level : " + (levelNum + 1));
+		
+		if(levelNum == 0) {
+
+			this.dimension = Game.ONE_TWO_ID; // Assign the dimension to the level dimension
+			{
+				objects.add(new Block(3, 0));
 				objects.add(new Block(3, 1));
 				objects.add(new Block(3, 2));
 				objects.add(new Block(3, 5));
 				objects.add(new Block(3, 6));
 				objects.add(new Block(3, 7));
-			objects.add(new Moveable(3,3));
+				objects.add(new Moveable(3,3));
 				objects.add(new Moveable(3,4));
+			}
 			this.goal = new Goal(); // Initialize the goal
 			objects.add(goal); // Add the goal to the objects list
 			this.player = new Player(); // Initialize the player
 			objects.add(player); // Add the player to the objects list
+		}
+		else if (levelNum == 1) {
 			
-		} else if (dimension == Game.TWO_THREE_ID) {
+			this.dimension = Game.TWO_THREE_ID;
+			
 			for(int i = 0; i < Game.LEVEL_SIZE; i++) {
 				objects.add(new Block(3, i, 0));
 			}
@@ -105,6 +115,13 @@ public class Level {
 				objects.add(new Block(3, i, 7));
 			}
 			this.goal = new Goal(7, 7); // Initialize the goal
+			objects.add(goal); // Add the goal to the objects list
+			this.player = new Player(); // Initialize the player
+			objects.add(player); // Add the player to the objects list
+		} else {
+			
+			this.dimension = Game.ONE_TWO_ID;
+			this.goal = new Goal(); // Initialize the goal
 			objects.add(goal); // Add the goal to the objects list
 			this.player = new Player(); // Initialize the player
 			objects.add(player); // Add the player to the objects list

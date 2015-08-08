@@ -71,7 +71,7 @@ public abstract class GameObject {
 				if(tempz >= 0 && tempz <= Game.LEVEL_SIZE - 1) {
 					
 					int temp = level.level[tempx][tempy][tempz][tempw];
-					System.out.println("Temp : " + temp);
+					//System.out.println("Temp : " + temp);
 					
 					if(!canMove)
 						return false;
@@ -82,6 +82,11 @@ public abstract class GameObject {
 							
 							moveto(tempx, tempy, tempz, tempw);
 							return true;
+						} else {
+							
+							if(id == Game.PLAYER_ID && level.getObject(tempx, tempy, tempz, tempw).id == Game.GOAL_ID) {
+								level.isDone = true;
+							}
 						}
 					} else {
 						
