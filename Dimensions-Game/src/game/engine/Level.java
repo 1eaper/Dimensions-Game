@@ -11,6 +11,7 @@ public class Level {
 	private int dimension; // The dimension the level is in
 	private Player player; // The player
 	private Goal goal; // The goal
+	private DimensionScroller ds; // The dimension scroller
 	private ArrayList<GameObject> objects; // A list of objects in the level
 	//private int[][][][] layout; // The array to initialize the level
 	public int[][][][] level; // All of the objects in the level by coordinate
@@ -22,6 +23,7 @@ public class Level {
 		
 		this.isDone = false;
 		this.objects = new ArrayList<GameObject>(); // Initialize the objects list
+		this.ds = new DimensionScroller();
 		
 		tempSetup(levelNum);
 		
@@ -35,16 +37,20 @@ public class Level {
 	
 	// Update everything in the level
 	public void update() {
-
-		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
-		if(dimension == Game.ONE_TWO_ID)
-			this.y = Display.getHeight() / 2; // Set the y position of the level
-		else if(dimension == Game.TWO_THREE_ID)
-			this.y = Display.getHeight() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the y position of the level
 		
 		for(GameObject go : objects) { // For all of the objects in the level
 			
 			go.update(); // Update the object
+		}
+
+		this.x = Display.getWidth() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the x position of the level
+		if(dimension == Game.ONE_TWO_ID) {
+			this.y = Display.getHeight() / 2; // Set the y position of the level
+			ds.update(player.getY());
+		}
+		else if(dimension == Game.TWO_THREE_ID) {
+			this.y = Display.getHeight() / 2 - Game.LEVEL_SIZE * Game.TILE_SIZE / 2; // Set the y position of the level
+			ds.update(player.getZ());
 		}
 	}
 	
@@ -58,6 +64,10 @@ public class Level {
 			if(dimension == Game.TWO_THREE_ID && go.getZ() == player.getZ())
 				go.render(x, y, dimension);
 		}
+		
+		ds.render(x, y, dimension);
+		
+		
 	}
 	
 	// Move the player
