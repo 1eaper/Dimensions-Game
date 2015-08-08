@@ -94,6 +94,21 @@ public class Level {
 				objects.add(new Block(3, 5));
 				objects.add(new Block(3, 6));
 				objects.add(new Block(3, 7));
+			}
+			this.goal = new Goal(); // Initialize the goal
+			objects.add(goal); // Add the goal to the objects list
+			this.player = new Player(); // Initialize the player
+			objects.add(player); // Add the player to the objects list
+		} else if (levelNum == 1) {
+
+			this.dimension = Game.ONE_TWO_ID; // Assign the dimension to the level dimension
+			{
+				objects.add(new Block(3, 0));
+				objects.add(new Block(3, 1));
+				objects.add(new Block(3, 2));
+				objects.add(new Block(3, 5));
+				objects.add(new Block(3, 6));
+				objects.add(new Block(3, 7));
 				objects.add(new Moveable(3,3));
 				objects.add(new Moveable(3,4));
 			}
@@ -101,8 +116,7 @@ public class Level {
 			objects.add(goal); // Add the goal to the objects list
 			this.player = new Player(); // Initialize the player
 			objects.add(player); // Add the player to the objects list
-		}
-		else if (levelNum == 1) {
+		} else if (levelNum == 2) {
 			
 			this.dimension = Game.TWO_THREE_ID;
 			

@@ -18,7 +18,7 @@ public class Player extends GameObject{
 		
 		// Initializes the timer
 		moveTime = .125f;
-		timer = 0;
+		timer = moveTime;
 		
 		this.id = Game.PLAYER_ID; // Sets the player's id to the player id
 	}
